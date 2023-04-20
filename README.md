@@ -1,2 +1,2 @@
 # Covertype_with_RestAPI
- Simple Rest API 
+ Simple ml model Rest API 
