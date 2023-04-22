@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 from sklearn.metrics import confusion_matrix
 
 def create_model_plots(history):
@@ -12,7 +11,7 @@ def create_model_plots(history):
     ax.set_ylabel('Accuracy')
     ax.set_xlabel('Epoch')
     ax.legend(['train', 'val'], loc='upper left')
-    plt.savefig("img/Model Accuracy.png")
+    plt.savefig("evaluate/Model_Accuracy.png")
     plt.clf()
 
     fig, ax = plt.subplots()
@@ -22,14 +21,13 @@ def create_model_plots(history):
     ax.set_ylabel('Loss')
     ax.set_xlabel('Epoch')
     ax.legend(['train', 'val'], loc='upper left')
-    plt.savefig("img/Model Loss.png")
+    plt.savefig("evaluate/Model_Loss.png")
     plt.clf()
 
     return True
 
 def create_confusion_mtx(y_pred, y_test):
-    confusion_mtx = confusion_matrix(np.argmax(y_test, axis=1), np.argmax(y_pred, axis=1))
-    ((confusion_mtx.astype('float') / confusion_mtx.sum(axis=1)[:, np.newaxis]) * 100).round(2)
+    confusion_mtx = confusion_matrix( y_test, y_pred, normalize='true')
     fig, ax = plt.subplots()
-    ax = sns.heatmap(confusion_mtx, annot_kws={"size": 20})
-    plt.savefig("Confusion Matrix.png")
+    ax = sns.heatmap(confusion_mtx, annot=True, cmap='Blues')
+    plt.savefig("evaluate/Confusion_Matrix.png")
